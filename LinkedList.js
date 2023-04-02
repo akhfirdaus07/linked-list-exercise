@@ -54,26 +54,41 @@ const LinkedList = ()=>{
     const pop=()=>{
         if(HEAD===null) return console.log("List is empty");
         if(HEAD.nextNode===null) HEAD=null;
-        
-        at(length-1).nextNode=null;
+        let pointer=HEAD;
+        for(let i=1;i<length-1;i++) pointer=pointer.nextNode;
+        pointer.nextNode=null;
         length--;
         console.log(`Success delete the last node`);
     };
 
-    const find=(values)=>{
+    const contains=(value)=>{
         if(HEAD===null) return console.log("List is empty");
         let pointer=HEAD;
         for(let i=1;i<=length;i++){
-            if(pointer.value==values){
+            if(pointer.value==value){
                 return console.log(true)
             } else {
                 pointer=pointer.nextNode;
             }
         };
         console.log(false);
-    }
+    };
 
-    return { append, prepend, size, head, tail, at, pop, find };
+    const find=(value)=>{
+        if(HEAD===null) return console.log("List is empty");
+        let pointer=HEAD;
+        let total=0;
+        for(let i=1;i<=length;i++){
+            if(pointer.value==value){
+                console.log(`value found in index ${i}`);
+                total+=1;
+            } 
+            pointer=pointer.nextNode;
+        };
+        if(total===0) console.log(null);
+    };
+
+    return { append, prepend, size, head, tail, at, pop, contains, find  };
 };
 
 const list=LinkedList();
@@ -84,15 +99,21 @@ list.append("node5");
 list.prepend("node2");
 list.prepend("node1");
 
-list.size();
-list.head();
-list.tail();
+// list.size();
+// list.head();
+// list.tail();
 
-list.at("satu");
-list.at(-1);
-list.at(3);
+// list.at("satu");
+// list.at(-1);
+// list.at(3);
 
 list.pop();
+
+// list.contains("node5");
+// list.contains("node4");
+// list.contains("node3");
+// list.contains("node2");
+// list.contains("node1");
 
 list.find("node5");
 list.find("node4");
